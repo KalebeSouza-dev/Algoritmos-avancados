@@ -1,0 +1,1 @@
+Este é um repositório destinado às questões da disciplina de Algoritmos Avançados I da UFCG. O objetivo é reunir soluções focadas em eficiência e boas práticas, com a implementação de algoritmos otimizados para resolver problemas computacionais de forma clara e performática.

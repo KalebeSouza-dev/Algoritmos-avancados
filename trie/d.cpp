@@ -10,13 +10,11 @@ const int MAXN = 1e5 + 100;
 const ll INF = 1e12;
 
 struct Node {
-    int freq = 0;
-    char valor;
+    bool end;
     Node* pont[3];
 
-    Node(char v){
-        valor = v;
-        freq = 0;
+    Node(){
+        end = false;
         for(int i = 0; i < 3; i++)
             pont[i] = nullptr;
     }
@@ -27,51 +25,34 @@ struct Trie{
     void update(string str){
         Node* aux = root;
         for (auto c : str){
-            if (aux->pont[c-'a'] == nullptr) aux->pont[c-'a'] = new Node(c);
+            if (aux->pont[c-'a'] == nullptr) aux->pont[c-'a'] = new Node();
             aux = aux->pont[c-'a'];
         }
+        aux->end = true;
     }
-    bool query(string str){
-        Node* aux = root;
-        bool out = false;
-        for (int i = 0; i < str.length(); i++){
-            char c = str[i];
-            if (aux->pont[c-'a']->valor == c) {
-                aux = aux->pont[c-'a'];
-            } else {
-                Node* auxB = aux->pont[(c-'b') % 3];
-                for (int j = i; j < str.length(); j++){
-                    char c = str[j];
-                    if (auxB->pont[c-'a'] == nullptr) break;
-                    if (auxB->pont[c-'a']->valor == c) {
-                        auxB = auxB->pont[c-'a'];
-                    } else {
-                        out = true;
-                        break;
-                    }
-                }
-                if (out) return out;
+    bool dfs(Node* node, const string& s, int pos, bool used){
+        if (!node) return false;
 
-                Node* auxC = aux->pont[(c-'c') % 3];
-                for (int j = i; j < str.length(); j++){
-                    char c = str[j];
-                    if (auxC->pont[c-'a'] == nullptr) break;
-                    if (auxC->pont[c-'a']->valor == c) {
-                        auxC = auxC->pont[c-'a'];
-                    } else {
-                        out = true;
-                        break;
-                    }
-                }
+        if (pos == s.size()) return node->end && used;
 
-                break;
+        for(int i=0; i < 3; i++){
+            if(node->pont[i]){
+                if ((i == s[pos] - 'a')) {
+                    if (dfs(node->pont[i], s, pos+1, used))
+                        return true;
+                } else if(!used){
+                    if (dfs(node->pont[i], s, pos+1, true))
+                        return true;
+                }
             }
-            
         }
         return false;
     }
+    string query(string str){
+       return (dfs(root, str, 0, false)) ? "YES" : "NO";
+    }
     Trie() {
-        root = new Node('0');
+        root = new Node();
     };
 };
 
@@ -85,8 +66,7 @@ int main(){
     }
     while (q--){
         string s; cin >> s;
-        if (trie.query(s)) cout << "YES" << "\n";
-        else cout << "NO" << "\n";
+        cout << trie.query(s) << endl;
     }
 
     return 0;

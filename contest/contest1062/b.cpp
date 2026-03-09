@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef pair<ll,ll> pii;
+#define all(x) (x).begin(),(x).end()
+
+void solve_tc(){
+    int n; cin >> n;
+    string a, b; cin >> a >> b;
+    sort(all(a));
+    sort(all(b));
+    if (a == b) cout << "YES" << endl;
+    else cout << "NO" << endl;
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    
+    int tc; cin >> tc;
+    while(tc--) solve_tc();
+    
+    return 0;
+}

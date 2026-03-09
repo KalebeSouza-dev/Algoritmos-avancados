@@ -1,0 +1,1 @@
+{"name":"Local: d","url":"c:\\Users\\kaleb\\Desktop\\programação\\Algoritmos-Avançados\\trie\\d.cpp","tests":[{"id":1770248248790,"input":"2 3\naaaaa\nacacaca\naabaa\nccacacc\ncaaac","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\kaleb\\Desktop\\programação\\Algoritmos-Avançados\\trie\\d.cpp","group":"local","local":true}

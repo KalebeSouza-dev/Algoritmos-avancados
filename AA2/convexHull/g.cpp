@@ -52,3 +52,57 @@ int main(){
 
     return 0;
 }
+
+ll prod(ll x1,ll  y1,ll x2,ll y2,ll x3,ll y3){
+    return ((x1 - x2) * (y3 - y2)) - ((x3 - x2) * (y1- y2));
+}
+
+void solve_tc(){
+    ll x1, y1, x2, y2, x3, y3; cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+
+    ll p = prod(x1, y1, x2, y2, x3, y3);
+    if (p == 0) cout << "TOUCH";
+    else if (p < 0) cout << "LEFT";
+    else cout << "RIGHT";
+    cout << endl;
+}
+
+int kmp(string str, int n){
+    vector<int> arr;
+    arr.push_back(0);
+    int j = 0;
+    int out = 0;
+    for(int i = 1; i < str.length(); i ++){
+        while(j > 0){
+            if (str[j] != str[i]) j = arr[j-1];
+            else break;
+        }
+        if (str[j] == str[i]) j++;
+        if(j >= n) {
+            out++;
+            j = arr[j-1];
+        }
+        arr.push_back(j);
+    }
+    return out;
+}
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    
+    string s, a; cin >> s >> a;
+    cout << kmp(a + "#" + s, a.size()) << endl;
+    
+    return 0;
+}
+
+ll prod(ll x1,ll  y1,ll x2,ll y2,ll x3,ll y3){
+    return ((x1 - x2) * (y3 - y2)) - ((x3 - x2) * (y1- y2));
+}
+void solve_tc(){
+    ll x1, y1, x2, y2, x3, y3; cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    ll p = prod(x1, y1, x2, y2, x3, y3);
+    if (p == 0) cout << "TOUCH";
+    else if (p < 0) cout << "LEFT";
+    else cout << "RIGHT";
+    cout << endl;
+}

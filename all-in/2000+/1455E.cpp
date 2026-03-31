@@ -14,41 +14,51 @@ typedef long long ll;
 //r: (a,c) e (b,d)
 //s: (a,d) e (b,c)
 
-ll ans(auto x0, auto x1, auto x2, auto x3){
-    ll q = abs(x0.x - x1.x) + abs(x2.x - x3.x);
-    q += min(abs(x0.y - x2.y) + abs(x1.y - x3.y),
-            abs(x0.y - x3.y) + abs(x1.y - x2.y));
-
-    ll r = abs(x0.x - x2.x) + abs(x1.x - x3.x);
-    r += min(abs(x0.y - x1.y) + abs(x2.y - x3.y),
-            abs(x0.y - x3.y) + abs(x1.y - x2.y));
-
-    ll s = abs(x0.x - x3.x) + abs(x1.x - x2.x);
-    s += min(abs(x0.y - x2.y) + abs(x1.y - x3.y),
-            abs(x0.y - x1.y) + abs(x2.y - x3.y));
-
-    return min({q, r, s});
-}
-
 void solve_tc(){
-    pair<int, int> a, b, c, d;
-    cin >> a.x >> a.y;
-    cin >> b.x >> b.y;
-    cin >> c.x >> c.y;
-    cin >> d.x >> d.y;
+    vector<pair<ll, ll>> p(4);
+    rep(i, 0, 4) cin >> p[i].x >> p[i].y;
 
-    vector<pair<int, int>> pts = {a, b, c, d};
+    ll ans = LLONG_MAX;
 
-    vector<int> ord_x = {a.x, b.x, c.x, d.x};
-    sort(all(ord_x));
-    ll cost_x = (ord_x[1] - ord_x[0]) + (ord_x[3] - ord_x[2]);
+    rep(rot, 0, 2){
+        rep(i, 0, 4) rep(j, 0, 4){
+            ll x1 = p[i].x;
+            ll x2 = p[j].x;
+            if(x1 > x2) continue;
 
-    vector<int> ord_y = {a.y, b.y, c.y, d.y};
-    sort(all(ord_y));
-    ll cost_y = (ord_y[1] - ord_y[0]) + (ord_y[3] - ord_y[2]);
+            ll side = abs(x1 - x2);
 
-    cout << cost_x + cost_y << endl;
-    cout << ans(a, b, c, d) << endl;
+            rep(k, 0, 4){
+                ll y1 = p[k].y;
+
+                for(int sgn : {-1, 1}){
+                    ll y2 = y1 + sgn * side;
+
+                    vector<pair<ll,ll>> sq = {
+                        {x1, y1},
+                        {x2, y1},
+                        {x2, y2},
+                        {x1, y2}
+                    };
+
+                    sort(all(sq));
+
+                    do{
+                        ll cur = 0;
+                        rep(t, 0, 4){
+                            cur += abs(p[t].x - sq[t].x) + abs(p[t].y - sq[t].y);
+                        }
+                        ans = min(ans, cur);
+                    }while(next_permutation(all(sq)));
+                }
+            }
+        }
+
+        // swap x e y
+        for(auto &pt : p) swap(pt.x, pt.y);
+    }
+
+    cout << ans << endl;
 }
 
 int main(){

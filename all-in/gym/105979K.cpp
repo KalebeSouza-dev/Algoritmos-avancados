@@ -12,24 +12,27 @@ typedef pair<int, int> pii;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
-    int n, k; cin >> n >> k;
-    vi arr(n); rep(i, 0, n) cin >> arr[i];
 
-    vi pref; int mn = INT32_MAX;
+    ll n, k; cin >> n >> k;
+    vi sum(n, 0), a(n), b(n);
+    rep(i, 0, n) cin >> a[i];
+    rep(i, 0, n) cin >> b[i];
+    sort(all(a)); sort(all(b));
+    rep(i, 0, n) sum[i] = a[i]+b[i];
+
+    int ans = 0;
     rep(i, 0, n){
-        mn = min(mn, arr[i]);
-        pref.pb(mn);
-        //cout << mn << " ";
-    }
-    //cout << endl;
-    ll l = 1, r = 1123456789;
-    while(true){
-        ll mid = (l + r) / 2;
-        if ()
+        if (sum[i] <= k){
+            k-=sum[i];
+            ans++;
+        } else {
+            break;
+        }
     }
 
-
+    cout << ans << endl;
 
     return 0;
 }
+
+//maldito talento

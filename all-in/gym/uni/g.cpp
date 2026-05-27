@@ -12,24 +12,18 @@ typedef pair<int, int> pii;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
+    string s; cin >> s;
+    string sp = "BR-SP";
+
+    if (s[3] != 'S' && s[4] !='P') cout << "N";
+    else if (s[3] == 'S' && s[4] == 'P') cout << "S";
+    else if ((s[3] == 'S' && s[4] == '?') || (s[3] == '?' && s[4] =='P')) cout << "T";
+    else cout << "N";
+    cout << endl;
     
-    int n, k; cin >> n >> k;
-    vi arr(n); rep(i, 0, n) cin >> arr[i];
-
-    vi pref; int mn = INT32_MAX;
-    rep(i, 0, n){
-        mn = min(mn, arr[i]);
-        pref.pb(mn);
-        //cout << mn << " ";
-    }
-    //cout << endl;
-    ll l = 1, r = 1123456789;
-    while(true){
-        ll mid = (l + r) / 2;
-        if ()
-    }
-
-
 
     return 0;
 }
+
+//maldito talento

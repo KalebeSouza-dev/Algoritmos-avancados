@@ -10,24 +10,18 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
 
+struct Point{
+    int x, y;
+};
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
-    int n, k; cin >> n >> k;
-    vi arr(n); rep(i, 0, n) cin >> arr[i];
 
-    vi pref; int mn = INT32_MAX;
+    int n; cin >> n; vector<Point> pts(n);
     rep(i, 0, n){
-        mn = min(mn, arr[i]);
-        pref.pb(mn);
-        //cout << mn << " ";
+        cin >> pts[i].x >> pts[i].y;
     }
-    //cout << endl;
-    ll l = 1, r = 1123456789;
-    while(true){
-        ll mid = (l + r) / 2;
-        if ()
-    }
+    
 
 
 

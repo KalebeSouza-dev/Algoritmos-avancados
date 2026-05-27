@@ -12,24 +12,26 @@ typedef pair<int, int> pii;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
+    int n; cin >> n;
+
+    vector<pii> temp;
+    rep(i, 0, n) {
+        int x, y; cin >> x >> y;
+        temp.pb({x, 1});
+        temp.pb({y, -1});
+    }
+    sort(all(temp));
     
-    int n, k; cin >> n >> k;
-    vi arr(n); rep(i, 0, n) cin >> arr[i];
-
-    vi pref; int mn = INT32_MAX;
-    rep(i, 0, n){
-        mn = min(mn, arr[i]);
-        pref.pb(mn);
-        //cout << mn << " ";
-    }
-    //cout << endl;
-    ll l = 1, r = 1123456789;
-    while(true){
-        ll mid = (l + r) / 2;
-        if ()
+    ll ans = 0, curr =0;
+    for(auto [x, y] : temp){
+        curr += y;
+        ans = max(ans, curr);
     }
 
-
+    cout << ans << endl;
 
     return 0;
 }
+
+//maldito talento

@@ -12,24 +12,19 @@ typedef pair<int, int> pii;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
-    int n, k; cin >> n >> k;
+
+    int n; cin >> n;
     vi arr(n); rep(i, 0, n) cin >> arr[i];
 
-    vi pref; int mn = INT32_MAX;
-    rep(i, 0, n){
-        mn = min(mn, arr[i]);
-        pref.pb(mn);
-        //cout << mn << " ";
-    }
-    //cout << endl;
-    ll l = 1, r = 1123456789;
-    while(true){
-        ll mid = (l + r) / 2;
-        if ()
+    int curr = arr[0];
+    rep(i, 1, n){
+        curr = __gcd(curr, arr[i]);
     }
 
-
+    if (curr == 1) cout << "Naya\n";
+    else cout << "Hassan\n";
 
     return 0;
 }
+
+//maldito talento
